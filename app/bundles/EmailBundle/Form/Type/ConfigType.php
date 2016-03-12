@@ -209,14 +209,15 @@ class ConfigType extends AbstractType
             'choice',
             array(
                 'choices'     => array(
-                    'mail'                      => 'mautic.email.config.mailer_transport.mail',
-                    'mautic.transport.mandrill' => 'mautic.email.config.mailer_transport.mandrill',
-                    'mautic.transport.sendgrid' => 'mautic.email.config.mailer_transport.sendgrid',
-                    'mautic.transport.amazon'   => 'mautic.email.config.mailer_transport.amazon',
-                    'mautic.transport.postmark' => 'mautic.email.config.mailer_transport.postmark',
-                    'gmail'                     => 'mautic.email.config.mailer_transport.gmail',
-                    'sendmail'                  => 'mautic.email.config.mailer_transport.sendmail',
-                    'smtp'                      => 'mautic.email.config.mailer_transport.smtp'
+                    'mail'                       => 'mautic.email.config.mailer_transport.mail',
+                    'mautic.transport.mandrill'  => 'mautic.email.config.mailer_transport.mandrill',
+                    'mautic.transport.sparkpost' => 'mautic.email.config.mailer_transport.sparkpost',
+                    'mautic.transport.sendgrid'  => 'mautic.email.config.mailer_transport.sendgrid',
+                    'mautic.transport.amazon'    => 'mautic.email.config.mailer_transport.amazon',
+                    'mautic.transport.postmark'  => 'mautic.email.config.mailer_transport.postmark',
+                    'gmail'                      => 'mautic.email.config.mailer_transport.gmail',
+                    'sendmail'                   => 'mautic.email.config.mailer_transport.sendmail',
+                    'smtp'                       => 'mautic.email.config.mailer_transport.smtp'
                 ),
                 'label'       => 'mautic.email.config.mailer.transport',
                 'required'    => false,
@@ -266,6 +267,7 @@ class ConfigType extends AbstractType
                 "cram-md5"
             ], "config_emailconfig_mailer_transport":[
                 "mautic.transport.mandrill",
+                "mautic.transport.sparkpost",
                 "mautic.transport.sendgrid",
                 "mautic.transport.amazon",
                 "mautic.transport.postmark",

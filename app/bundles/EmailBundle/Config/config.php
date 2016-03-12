@@ -210,6 +210,14 @@ return array(
                     'setMauticFactory' => array('mautic.factory')
                 )
             ),
+            'mautic.transport.sparkpost'          => array(
+                'class'        => 'Mautic\EmailBundle\Swiftmailer\Transport\SparkpostTransport',
+                'serviceAlias' => 'swiftmailer.mailer.transport.%s',
+                'methodCalls'  => array(
+                    'setUsername'      => array('%mautic.mailer_user%'),
+                    'setPassword'      => array('%mautic.mailer_password%')
+                )
+            ),
             'mautic.transport.sendgrid'          => array(
                 'class'        => 'Mautic\EmailBundle\Swiftmailer\Transport\SendgridTransport',
                 'serviceAlias' => 'swiftmailer.mailer.transport.%s',
