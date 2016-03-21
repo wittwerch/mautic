@@ -29,4 +29,7 @@ $parameters = array(
     'date_format_dateonly' => 'd M Y',
     'date_format_timeonly' => 'G:i',
     'ip_lookup_service' => 'maxmind_download',
+    'do_not_track_ips' => array(
+        "213.221.250.50"
+    ),
 );
