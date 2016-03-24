@@ -30,7 +30,9 @@ class RoboFile extends \Robo\Tasks
      */
     public function configure()
     {
-        $this->_copy('local.template.php', './app/config/local.php');
+        $this->taskFileSystemStack()
+            ->copy('local.template.php', './app/config/local.php', true)
+            ->run();
 
         $values = array();
 
@@ -43,6 +45,8 @@ class RoboFile extends \Robo\Tasks
         $values['cache_path'] = $shared_path."/cache";
         $values['log_path'] = $shared_path."/logs";
         $values['mailer_spool_path'] = $shared_path."/spool";
+
+        $values['upload_dir'] = $this->askDefault('Please enter the path where uploads should be stored', '/vagrant/media/files');
 
         $values['secret_key'] = $this->_randomString();
 
