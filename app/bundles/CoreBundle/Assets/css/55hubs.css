@@ -1,0 +1,15 @@
+.mautic-brand {
+  padding-top: 10px !important;
+}
+
+.sidebar-header {
+  background-color: #009BA0 !important;
+}
+
+.loading-bar:after, .canvas-loading-bar:after, .modal-loading-bar:after, .loading-bar:before, .canvas-loading-bar:before, .modal-loading-bar:before {
+    background-color: #009BA0 !important;
+}
+
+.loading-bar, .canvas-loading-bar, .modal-loading-bar {
+      background-color: #e6a83d !important;
+}
