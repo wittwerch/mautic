@@ -12,7 +12,7 @@ use Mautic\PluginBundle\Bundle\PluginBundleBase;
 
 class HubsCoreBundle extends PluginBundleBase
 {
-    public function getParent()
+   public function getParent()
     {
         return 'MauticCoreBundle';
     }
