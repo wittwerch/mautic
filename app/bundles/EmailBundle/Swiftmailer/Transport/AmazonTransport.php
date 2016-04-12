@@ -92,8 +92,8 @@ class AmazonTransport extends \Swift_SmtpTransport implements InterfaceCallbackT
                     // Check notification type is bounce
                     if (isset($messageDataArray['notificationType']) && strtolower($messageDataArray['notificationType']) == 'bounce') {
                         // Handle only hard bounces
-                        if (isset($messageDataArray['bounce']) && $messageDataArray['bounce']['bounceType'] == 'Permanent' && isset($messageDataArray['bounce']['bouncedRecipients'])) {
-                            // Get bounced recipients array
+                        if (isset($messageDataArray['bounce']) && strtolower($messageDataArray['bounce']['bounceType']) == 'permanent' && isset($messageDataArray['bounce']['bouncedRecipients'])) {
+                            // Get bounced recipients in an array
                             $bouncedRecipients = $messageDataArray['bounce']['bouncedRecipients'];
                             foreach ($bouncedRecipients as $bouncedRecipientRecord) {
                                 if (isset($bouncedRecipientRecord['emailAddress']) && isset($bouncedRecipientRecord['diagnosticCode'])) {
