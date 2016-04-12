@@ -79,6 +79,11 @@ $container->loadFromExtension('security', array(
             'bazinga_oauth'   => true,
             'stateless'       => true
         ),
+        'aws_callback'  => array(
+            'pattern'   => '^/mailer/amazon/callback',
+            'anonymous' => false,
+            'http_basic' => true,
+        ),
         'main'                 => array(
             'pattern'     => "^/s/",
             'form_login'  => array(
