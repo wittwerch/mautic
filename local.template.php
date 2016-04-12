@@ -32,5 +32,6 @@ $parameters = array(
     'do_not_track_ips' => array(
         "213.221.250.50"
     ),
-    'upload_dir' => '##upload_dir##'
+    'upload_dir' => '##upload_dir##',
+    'max_size' => '10'
 );
