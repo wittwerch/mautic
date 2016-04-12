@@ -77,7 +77,7 @@ class AmazonTransport extends \Swift_SmtpTransport implements InterfaceCallbackT
                     curl_setopt_array($curl, array(
                         CURLOPT_RETURNTRANSFER => 1,
                         CURLOPT_URL => $subscriptionUrl,
-                        CURLOPT_USERAGENT => $_SERVER['HTTP_USER_AGENT']
+                        CURLOPT_USERAGENT => 'mautic_amazon_ses_php_curl',
                     ));
                     // Send the request & save response to $resp
                     $resp = curl_exec($curl);
