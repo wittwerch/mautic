@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @package     Mautic
  * @copyright   2014 Mautic Contributors. All rights reserved.
@@ -16,14 +15,15 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class AmazonTransport
  */
-class AmazonTransport extends \Swift_SmtpTransport implements InterfaceCallbackTransport {
+class AmazonTransport extends \Swift_SmtpTransport implements InterfaceCallbackTransport
+{
 
     /**
      * {@inheritdoc}
      */
-    public function __construct($host = 'localhost', $port = 25, $security = null) {
-        parent::__construct('email-smtp.us-east-1.amazonaws.com', 587, 'tls');
-
+    public function __construct($host = 'localhost', $port = 25, $security = null)
+    {
+        parent::__construct($host, 587, 'tls');
         $this->setAuthMode('login');
     }
 
@@ -32,7 +32,8 @@ class AmazonTransport extends \Swift_SmtpTransport implements InterfaceCallbackT
      *
      * @return mixed
      */
-    public function getCallbackPath() {
+    public function getCallbackPath()
+    {
         return 'amazon';
     }
 
@@ -46,7 +47,8 @@ class AmazonTransport extends \Swift_SmtpTransport implements InterfaceCallbackT
      *
      * @return mixed
      */
-    public function handleCallbackResponse(Request $request, MauticFactory $factory) {
+    public function handleCallbackResponse(Request $request, MauticFactory $factory)
+    {
 
         $logger = $factory->getLogger();
         $logger->info("Receiving bounce_complaint from Amazon");
