@@ -4,10 +4,12 @@
  *
  * @see http://robo.li/
  */
+
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
+
 class RoboFile extends \Robo\Tasks
 {
-
-    use Robo\Task\Base\loadShortcuts;
 
     /**
      * Bootstrap installation
@@ -79,6 +81,49 @@ class RoboFile extends \Robo\Tasks
 
         # creates the admin account and role
         $this->_exec('php app/console doctrine:fixtures:load --fixtures plugins/HubsCoreBundle/InstallFixtures --no-interaction');
+
+    }
+
+    /**
+     * Deploy themes into the Mautic theme folder
+     *
+     */
+    public function deployThemes()
+    {
+        $repo_path = $this->askDefault('Please enter the path to the themes repository', '/55hubs-themes');
+
+        $fs = new Filesystem();
+        if (!$fs->exists($repo_path)) {
+            return Robo\Result::error($this, "Path to themes repository not found!");
+        }
+
+        $theme_pattern = $this->ask('Please enter pattern of themes you want to deploy (example: 55weeks*)');
+
+        // Use the Finder to get all folder from the top-level hierarchy
+        $finder = new Finder();
+        $finder->directories()->depth('== 0');
+
+        // if a pattern was specified, Finder will use it to exlucd all other folder
+        if ($theme_pattern) {
+            $finder->name($theme_pattern);
+        }
+
+        $finder->in($repo_path);
+
+        $theme_path = __DIR__."/themes";
+
+        foreach ($finder as $theme) {
+            $to = $theme_path."/".$theme->getBasename();
+            $this->say("Symlink from ".$theme." to ".$to);
+            if (!$fs->exists($to)) {
+                $this->taskFileSystemStack()
+                    ->symlink($theme, $to)
+                    ->run();
+            }
+            else {
+                $this->say("Symlink ".$to." already exists, skipping..");
+            }
+        }
 
     }
 

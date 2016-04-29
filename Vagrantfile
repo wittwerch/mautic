@@ -9,4 +9,6 @@ Vagrant.configure("2") do |config|
 
     config.vm.provision "shell", path: "vagrant_provison.sh", privileged: false
 
+    config.vm.synced_folder "../55hubs-themes", "/55hubs-themes"
+
 end
