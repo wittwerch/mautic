@@ -11,6 +11,8 @@ use Symfony\Component\Finder\Finder;
 class RoboFile extends \Robo\Tasks
 {
 
+    use Robo\Task\Base\loadShortcuts;
+
     /**
      * Bootstrap installation
      *
