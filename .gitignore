@@ -35,5 +35,6 @@
 !/media/images/avatar.png
 !/media/images/favicon.ico
 !/media/images/mautic_logo*
-/nbproject/private/
-/nbproject
+!/media/images/.htaccess
+/media/dashboards/*
+!/media/dashboards/*.json
