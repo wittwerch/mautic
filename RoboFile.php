@@ -21,7 +21,7 @@ class RoboFile extends \Robo\Tasks
         $this->stopOnFail(true);
 
         $this->say("Bootstrapping...");
-        $this->configComposer();
+        $this->_configComposer();
         $this->taskComposerInstall()->run();
         $this->configure();
     }
@@ -128,10 +128,35 @@ class RoboFile extends \Robo\Tasks
     }
 
     /**
+     * Update the system after you pulled code from Github
+     *
+     */
+    public function update()
+    {
+        # Clean cache
+        $this->_cleanDir($this->_getCachePath());
+
+        # Install composer dependencies
+        $this->taskComposerInstall()->run();
+
+        # Run Doctrine migrations
+        $this->_exec('php app/console doctrine:migrations:migrate -n --allow-no-migration');
+    }
+
+    /**
+     * Read path to cache directory from local config
+     *
+     */
+    private function _getCachePath() {
+        include __DIR__.'/app/config/local.php';
+        return $parameters['cache_path'];
+    }
+
+    /**
      * Configure composer with Github token
      *
      */
-    private function configComposer()
+    private function _configComposer()
     {
 
             $this->stopOnFail(false);
@@ -148,8 +173,6 @@ class RoboFile extends \Robo\Tasks
             $this->stopOnFail(true);
 
     }
-
-    # php app/console doctrine:migrations:migrate --no-interaction=true
 
     /**
      * Generate a random string
