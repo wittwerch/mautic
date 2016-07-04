@@ -1,7 +1,0 @@
-{
-    "name": "55weeks/55weeks-theme",
-    "type": "mautic-theme",
-    "require": {
-        "composer/installers": "~1.0"
-    }
-}
