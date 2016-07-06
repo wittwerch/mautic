@@ -12,14 +12,15 @@ namespace MauticPlugin\HubsCoreBundle\InstallFixtures\ORM;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Mautic\CoreBundle\Helper\CsvHelper;
+use Mautic\ReportBundle\Entity\Report;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Mautic\UserBundle\Entity\Role;
 
 /**
- * Class RoleData
+ * Class LoadReportData
  */
-class RoleData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class LoadReportData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
 
     /**
@@ -40,15 +41,25 @@ class RoleData extends AbstractFixture implements OrderedFixtureInterface, Conta
      */
     public function load(ObjectManager $manager)
     {
-        $translator = $this->container->get('translator');
-        $role       = new Role();
-        $role->setName($translator->trans('mautic.user.role.admin.name', [], 'fixtures'));
-        $role->setDescription($translator->trans('mautic.user.role.admin.description', [], 'fixtures'));
-        $role->setIsAdmin(1);
-        $manager->persist($role);
-        $manager->flush();
+        $reports = CsvHelper::csv_to_array(__DIR__.'/fakereportdata.csv');
+        foreach ($reports as $count => $rows) {
+            $report = new Report();
+            $key    = $count + 1;
+            foreach ($rows as $col => $val) {
+                if ($val != "NULL") {
+                    $setter = "set".ucfirst($col);
+                    if (in_array($col, ['columns', 'filters', 'graphs', 'tableOrder'])) {
+                        $val = unserialize(stripslashes($val));
+                    }
+                    $report->$setter($val);
+                }
+            }
 
-        $this->addReference('admin-role', $role);
+            $manager->persist($report);
+
+            $this->setReference('report-'.$key, $report);
+        }
+        $manager->flush();
     }
 
     /**
@@ -56,6 +67,6 @@ class RoleData extends AbstractFixture implements OrderedFixtureInterface, Conta
      */
     public function getOrder()
     {
-        return 1;
+        return 5;
     }
 }
