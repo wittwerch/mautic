@@ -1,12 +1,7 @@
 #!/usr/bin/env bash
 
-# Symlink code into wwwroot
-sudo ln -s /vagrant/ /var/www/public
-
-# Symlink robo.phar to PATH
-chmod +x bin/robo.phar
-sudo cp bin/robo.phar /usr/bin/
-
 # Update composer
 sudo composer self-update
 
+sudo ln -s /vagrant/55hubs.app /etc/nginx/sites-enabled/55hubs.conf
+sudo service nginx restart

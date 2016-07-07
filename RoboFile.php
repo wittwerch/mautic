@@ -39,9 +39,9 @@ class RoboFile extends \Robo\Tasks
         $values = array();
 
         $values['site_url'] = $this->askDefault('Please enter the URL for this Mautic installation', 'http://192.168.33.10/');
-        $values['db_name'] = $this->askDefault('Database name', 'mautic');
-        $values['db_user'] = $this->askDefault('Database user', 'root');
-        $values['db_password'] = $this->askDefault('Database password', 'root');
+        $values['db_name'] = $this->askDefault('Database name', 'homestead');
+        $values['db_user'] = $this->askDefault('Database user', 'homestead');
+        $values['db_password'] = $this->askDefault('Database password', 'secret');
 
         $shared_path = $this->askDefault('Please enter the path where shared data should be stored (cache, logs, spool)', '/vagrant/app');
         $values['cache_path'] = $shared_path."/cache";

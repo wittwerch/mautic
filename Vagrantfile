@@ -3,7 +3,7 @@
 
 Vagrant.configure("2") do |config|
 
-    config.vm.box = "scotch/box"
+    config.vm.box = "laravel/homestead"
     config.vm.network "private_network", ip: "192.168.33.10"
     config.vm.hostname = "55hubs"
 
