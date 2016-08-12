@@ -33,5 +33,6 @@ $parameters = array(
         "213.221.250.50"
     ),
     'upload_dir' => '##upload_dir##',
-    'max_size' => '10'
+    'max_size' => '10',
+    'dev_hosts' => array('192.168.33.1')
 );
