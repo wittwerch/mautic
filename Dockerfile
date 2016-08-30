@@ -1,5 +1,8 @@
-FROM php:5.6-fpm
+FROM php:5.6-apache
 MAINTAINER Michael Babker <michael.babker@mautic.org> (@mbabker)
+
+# Enable Apache Rewrite Module
+RUN a2enmod rewrite
 
 # Install PHP extensions
 RUN apt-get update && apt-get install -y libc-client-dev libicu-dev libkrb5-dev libmcrypt-dev libssl-dev unzip zip
@@ -27,4 +30,4 @@ COPY makeconfig.php /makeconfig.php
 COPY makedb.php /makedb.php
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["php-fpm"]
+CMD ["apache2-foreground"]
