@@ -294,8 +294,8 @@ class PointModel extends CommonFormModel
                     );
 
                     $actionTags = $action->getTags();
-                    if (!empty($actionTags)) {
-                        $lead->setTags($actionTags);
+                    foreach ($actionTags as $actionTag) {
+                        $lead->addTag($actionTag);
                     }
 
                     $event = new PointActionEvent($action, $lead);
