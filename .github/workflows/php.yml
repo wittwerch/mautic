@@ -1,12 +1,10 @@
-name: PHP Composer
+name: Mautic Build
 
 on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -15,7 +13,7 @@ jobs:
         with:
           php-version: '7.1'
           extension-csv: mbstring, xdebug #optional, setup extensions
-          ini-values-csv: post_max_size=256M, short_open_tag=On #optional, setup php.ini configuration
+          ini-values-csv: memory_limit=2G, post_max_size=256M, short_open_tag=On #optional, setup php.ini configuration
           coverage: xdebug #optional, setup coverage driver
           pecl: true #optional, setup PECL
       - name: Check PHP Version
@@ -26,3 +24,9 @@ jobs:
         run: php -m
       - name: Install dependecies
         run: composer install
+      - name: Create database
+        run: mysql -u root -proot -e 'CREATE DATABASE mautictest;'
+      - name: Copy .env
+        run: cp .env.dist .env
+      - name: Run tests 
+        run: bin/phpunit --bootstrap vendor/autoload.php --configuration app/phpunit.xml.dist --fail-on-warning
