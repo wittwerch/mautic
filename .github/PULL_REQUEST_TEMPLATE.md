@@ -1,9 +1,12 @@
+**Please be sure you are submitting this against the _staging_ branch.**
+
 [//]: # ( Please answer the following questions: )
 
 | Q  | A
 | --- | ---
 | Bug fix? | 
 | New feature? | 
+| Automated tests included? |
 | Related user documentation PR URL | 
 | Related developer documentation PR URL | 
 | Issues addressed (#s or URLs) | 
@@ -21,7 +24,7 @@
 2. 
 
 #### Steps to test this PR:
-1. 
+1. Load up [this PR](https://mautibox.com)
 2. 
 
 #### List deprecations along with the new alternative:
